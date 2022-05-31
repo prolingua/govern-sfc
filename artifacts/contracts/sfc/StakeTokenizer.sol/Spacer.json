@@ -1,0 +1,10 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "Spacer",
+  "sourceName": "contracts/sfc/StakeTokenizer.sol",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603e80601d6000396000f3fe6080604052600080fdfea265627a7a72315820444a905a6bbce9d48e2ac81eecd248070b9c16c040d0744c7663fd8388fe066164736f6c63430005110032",
+  "deployedBytecode": "0x6080604052600080fdfea265627a7a72315820444a905a6bbce9d48e2ac81eecd248070b9c16c040d0744c7663fd8388fe066164736f6c63430005110032",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

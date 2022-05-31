@@ -1,0 +1,1980 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\adapters\\RelayProxy.sol": {
+      "lastModificationDate": 1651300645981,
+      "contentHash": "8d87129044c51626f50f0a0b0d7b69b4",
+      "sourceName": "contracts/adapters/RelayProxy.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../ownership/Ownable.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "RelayProxy"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\ownership\\Ownable.sol": {
+      "lastModificationDate": 1653662950030,
+      "contentHash": "45b5d30e50f171e18d8c9c2199decee8",
+      "sourceName": "contracts/ownership/Ownable.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../common/Initializable.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "Ownable"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\common\\Initializable.sol": {
+      "lastModificationDate": 1651068689490,
+      "contentHash": "2f1d6754a5208fb3797a875158d55219",
+      "sourceName": "contracts/common/Initializable.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.4.24 <0.7.0"
+      ],
+      "artifacts": [
+        "Initializable"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\verifiers\\ProposalTemplates.sol": {
+      "lastModificationDate": 1651300645996,
+      "contentHash": "4161e242f533cd7d2ba698e63c2d7502",
+      "sourceName": "contracts/verifiers/ProposalTemplates.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../common/Decimal.sol",
+        "../proposal/base/IProposal.sol",
+        "./IProposalVerifier.sol",
+        "../ownership/Ownable.sol",
+        "../version/Version.sol",
+        "../common/Initializable.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "ProposalTemplates"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\common\\Decimal.sol": {
+      "lastModificationDate": 1651068689490,
+      "contentHash": "244e5409b4e6c5dac85144deb059570a",
+      "sourceName": "contracts/common/Decimal.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "Decimal"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\proposal\\base\\IProposal.sol": {
+      "lastModificationDate": 1651300645991,
+      "contentHash": "c89bdd1ea794b752ea062e24e30e77e5",
+      "sourceName": "contracts/proposal/base/IProposal.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../../governance/Proposal.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "IProposal"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\verifiers\\IProposalVerifier.sol": {
+      "lastModificationDate": 1651300645995,
+      "contentHash": "4bf814246e4dd0f488c3e52b72e691ad",
+      "sourceName": "contracts/verifiers/IProposalVerifier.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../governance/Proposal.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "IProposalVerifier"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\version\\Version.sol": {
+      "lastModificationDate": 1651068689501,
+      "contentHash": "25f2ce5b90b13654a9abf7310cacb34e",
+      "sourceName": "contracts/version/Version.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "Version"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\governance\\Proposal.sol": {
+      "lastModificationDate": 1651300645987,
+      "contentHash": "7b07f43578e07d24de0dfc7ce8fea98b",
+      "sourceName": "contracts/governance/Proposal.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../proposal/base/IProposal.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "Proposal"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\verifiers\\BytecodeMatcher.sol": {
+      "lastModificationDate": 1651300645994,
+      "contentHash": "edf1f9f27c07a925d6f8b4620970003f",
+      "sourceName": "contracts/verifiers/BytecodeMatcher.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../common/GetCode.sol",
+        "../governance/Proposal.sol",
+        "./IProposalVerifier.sol",
+        "../common/Initializable.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "BytecodeMatcher"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\common\\GetCode.sol": {
+      "lastModificationDate": 1651300645983,
+      "contentHash": "ad6b5a774524f0eeee27bfee4ec4bcbe",
+      "sourceName": "contracts/common/GetCode.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "GetCode"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\verifiers\\OwnableVerifier.sol": {
+      "lastModificationDate": 1651300645995,
+      "contentHash": "c443b910155807d36a56cfce7a6f24c5",
+      "sourceName": "contracts/verifiers/OwnableVerifier.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../ownership/Ownable.sol",
+        "./IProposalVerifier.sol",
+        "../governance/Governance.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "OwnableVerifier"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\governance\\Governance.sol": {
+      "lastModificationDate": 1651300655516,
+      "contentHash": "47f1a8a5a4f92ba15a98bfe106a2c568",
+      "sourceName": "contracts/governance/Governance.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../common/ReentrancyGuard.sol",
+        "../common/SafeMath.sol",
+        "../model/Governable.sol",
+        "../proposal/base/IProposal.sol",
+        "../verifiers/IProposalVerifier.sol",
+        "../proposal/SoftwareUpgradeProposal.sol",
+        "./Proposal.sol",
+        "./Constants.sol",
+        "./GovernanceSettings.sol",
+        "./LRC.sol",
+        "../version/Version.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "Governance"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\common\\ReentrancyGuard.sol": {
+      "lastModificationDate": 1651068689491,
+      "contentHash": "59d8113aa37352cba8082184497d0a83",
+      "sourceName": "contracts/common/ReentrancyGuard.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./Initializable.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "ReentrancyGuard"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\common\\SafeMath.sol": {
+      "lastModificationDate": 1651300645985,
+      "contentHash": "db38ab635c06815fde3a173882b890fb",
+      "sourceName": "contracts/common/SafeMath.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "SafeMath"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\model\\Governable.sol": {
+      "lastModificationDate": 1651300645988,
+      "contentHash": "7157f2288063dc086245b50185149fb8",
+      "sourceName": "contracts/model/Governable.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "Governable"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\proposal\\SoftwareUpgradeProposal.sol": {
+      "lastModificationDate": 1651300645989,
+      "contentHash": "efb572458cdea1b96ee906854338ec0c",
+      "sourceName": "contracts/proposal/SoftwareUpgradeProposal.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../upgrade/Upgradability.sol",
+        "./base/Cancelable.sol",
+        "./base/DelegatecallExecutableProposal.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "SoftwareUpgradeProposal"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\governance\\Constants.sol": {
+      "lastModificationDate": 1651300645985,
+      "contentHash": "b16a1efa5451f147ef4e4880a2abd9ac",
+      "sourceName": "contracts/governance/Constants.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../common/SafeMath.sol",
+        "../common/Decimal.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "Constants",
+        "StatusConstants"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\governance\\GovernanceSettings.sol": {
+      "lastModificationDate": 1651300645986,
+      "contentHash": "28e2a7fbd9c77e446736135676f08cbc",
+      "sourceName": "contracts/governance/GovernanceSettings.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../common/Decimal.sol",
+        "../common/SafeMath.sol",
+        "../model/Governable.sol",
+        "../proposal/SoftwareUpgradeProposal.sol",
+        "./Constants.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "GovernanceSettings"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\governance\\LRC.sol": {
+      "lastModificationDate": 1651300645987,
+      "contentHash": "1fbc49d1cb3a8cee96ee57190688c9f3",
+      "sourceName": "contracts/governance/LRC.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../common/Decimal.sol",
+        "../common/SafeMath.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "LRC"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\upgrade\\Upgradability.sol": {
+      "lastModificationDate": 1651300645994,
+      "contentHash": "0450499b07935248e0d69b54ac73f7ae",
+      "sourceName": "contracts/upgrade/Upgradability.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "Upgradability"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\proposal\\base\\Cancelable.sol": {
+      "lastModificationDate": 1651300645990,
+      "contentHash": "3a14f4384b6c4fdc566cd0fbb2b03929",
+      "sourceName": "contracts/proposal/base/Cancelable.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../../ownership/Ownable.sol",
+        "../../governance/Governance.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "Cancelable"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\proposal\\base\\DelegatecallExecutableProposal.sol": {
+      "lastModificationDate": 1651300645990,
+      "contentHash": "b4da7b9c927d04f0182654560ba9e4b8",
+      "sourceName": "contracts/proposal/base/DelegatecallExecutableProposal.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./BaseProposal.sol",
+        "../../governance/Proposal.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "DelegatecallExecutableProposal"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\proposal\\base\\BaseProposal.sol": {
+      "lastModificationDate": 1651300645989,
+      "contentHash": "a725b1da9e04063396877ac157e071a4",
+      "sourceName": "contracts/proposal/base/BaseProposal.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../../common/SafeMath.sol",
+        "./IProposal.sol",
+        "../../verifiers/IProposalVerifier.sol",
+        "../../governance/Proposal.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "BaseProposal"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\test\\UnitTestGovernance.sol": {
+      "lastModificationDate": 1651300645993,
+      "contentHash": "798ab389f2eac52f8a4288fb8750dd12",
+      "sourceName": "contracts/test/UnitTestGovernance.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../governance/Governance.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "UnitTestGovernance"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\proposal\\test\\ExecLoggingProposal.sol": {
+      "lastModificationDate": 1651300645992,
+      "contentHash": "8d62600f9847495d3345f1252e891fd0",
+      "sourceName": "contracts/proposal/test/ExecLoggingProposal.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../PlainTextProposal.sol",
+        "../../governance/Governance.sol",
+        "../../governance/Proposal.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "ExecLoggingProposal"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\proposal\\PlainTextProposal.sol": {
+      "lastModificationDate": 1651300645988,
+      "contentHash": "d9f34c2b242cd7422b01bf6443017cf9",
+      "sourceName": "contracts/proposal/PlainTextProposal.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./base/Cancelable.sol",
+        "./base/NonExecutableProposal.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "PlainTextProposal"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\proposal\\base\\NonExecutableProposal.sol": {
+      "lastModificationDate": 1651300645991,
+      "contentHash": "f4db44ac13ef17a86d892cf0b98d21e2",
+      "sourceName": "contracts/proposal/base/NonExecutableProposal.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./BaseProposal.sol",
+        "../../governance/Proposal.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "NonExecutableProposal"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\proposal\\test\\AlteredPlainTextProposal.sol": {
+      "lastModificationDate": 1651300645992,
+      "contentHash": "67ca3affe279698d094901d283b6240d",
+      "sourceName": "contracts/proposal/test/AlteredPlainTextProposal.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../PlainTextProposal.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "AlteredPlainTextProposal"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\sfc\\StakerConstants.sol": {
+      "lastModificationDate": 1651068721543,
+      "contentHash": "af374f71279ca67f75e43ecc8608dd88",
+      "sourceName": "contracts/sfc/StakerConstants.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/math/SafeMath.sol",
+        "../common/Decimal.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "StakersConstants"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\node_modules\\@openzeppelin\\contracts\\math\\SafeMath.sol": {
+      "lastModificationDate": 1653998788253,
+      "contentHash": "d208da96b6f6c1d204ee8248087cf2d7",
+      "sourceName": "@openzeppelin/contracts/math/SafeMath.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "SafeMath"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\sfc\\NodeDriver.sol": {
+      "lastModificationDate": 1651068689497,
+      "contentHash": "3688b3914888c11a78874408d434993a",
+      "sourceName": "contracts/sfc/NodeDriver.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/math/SafeMath.sol",
+        "../common/Initializable.sol",
+        "../ownership/Ownable.sol",
+        "./SFC.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "EVMWriter",
+        "NodeDriver",
+        "NodeDriverAuth"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\sfc\\SFC.sol": {
+      "lastModificationDate": 1653967608424,
+      "contentHash": "73a7c045c5baa6e08e21ff97455588e9",
+      "sourceName": "contracts/sfc/SFC.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/math/SafeMath.sol",
+        "./StakerConstants.sol",
+        "../ownership/Ownable.sol",
+        "../ownership/GovernanceRole.sol",
+        "../version/Version.sol",
+        "./NodeDriver.sol",
+        "./StakeTokenizer.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "SFC"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\ownership\\GovernanceRole.sol": {
+      "lastModificationDate": 1653967794889,
+      "contentHash": "22015bd688d81669afeb4c6ed16a5491",
+      "sourceName": "contracts/ownership/GovernanceRole.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../common/Initializable.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "GovernanceRole"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\sfc\\StakeTokenizer.sol": {
+      "lastModificationDate": 1651068689498,
+      "contentHash": "ff8e4b475b0efd42c4c551c75385bb83",
+      "sourceName": "contracts/sfc/StakeTokenizer.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./SFC.sol",
+        "../erc20/base/ERC20Burnable.sol",
+        "../erc20/base/ERC20Mintable.sol",
+        "../common/Initializable.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "Spacer",
+        "StakeTokenizer"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\erc20\\base\\ERC20Burnable.sol": {
+      "lastModificationDate": 1651068689493,
+      "contentHash": "eb39f198f319b88e7fb55bf5171e0e3d",
+      "sourceName": "contracts/erc20/base/ERC20Burnable.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./ERC20.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "ERC20Burnable"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\erc20\\base\\ERC20Mintable.sol": {
+      "lastModificationDate": 1651068689494,
+      "contentHash": "73172e37b395f5323cca7acf8104d9de",
+      "sourceName": "contracts/erc20/base/ERC20Mintable.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./ERC20.sol",
+        "./MinterRole.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "ERC20Mintable"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\erc20\\base\\ERC20.sol": {
+      "lastModificationDate": 1651068689492,
+      "contentHash": "aee432442ca25c5a217ca52383eb099e",
+      "sourceName": "contracts/erc20/base/ERC20.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/math/SafeMath.sol",
+        "./IERC20.sol",
+        "../../common/Initializable.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "ERC20"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\erc20\\base\\IERC20.sol": {
+      "lastModificationDate": 1651068689494,
+      "contentHash": "f280db954c24d67a426584ca73b26e58",
+      "sourceName": "contracts/erc20/base/IERC20.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "IERC20"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\erc20\\base\\MinterRole.sol": {
+      "lastModificationDate": 1651068689495,
+      "contentHash": "94393b632332ea4920ca677c5066759b",
+      "sourceName": "contracts/erc20/base/MinterRole.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./Roles.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "MinterRole"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\erc20\\base\\Roles.sol": {
+      "lastModificationDate": 1651068689495,
+      "contentHash": "dac10bf619ee9e84eb94d8c9b828e22b",
+      "sourceName": "contracts/erc20/base/Roles.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "Roles"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\test\\StubEvmWriter.sol": {
+      "lastModificationDate": 1651068689499,
+      "contentHash": "0e0c63f0d2c4948accfd50b2b8ab8d37",
+      "sourceName": "contracts/test/StubEvmWriter.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../sfc/NodeDriver.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "StubEvmWriter"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\test\\UnitTestSFC.sol": {
+      "lastModificationDate": 1653967744782,
+      "contentHash": "85573541f5bfa3adcb37701e168a3d96",
+      "sourceName": "contracts/test/UnitTestSFC.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../sfc/SFC.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "UnitTestSFC"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\erc20\\base\\ERC20Detailed.sol": {
+      "lastModificationDate": 1651068689493,
+      "contentHash": "15f622da84707751a636b2661a035f38",
+      "sourceName": "contracts/erc20/base/ERC20Detailed.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IERC20.sol",
+        "../../common/Initializable.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "ERC20Detailed"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\sfc\\NetworkInitializer.sol": {
+      "lastModificationDate": 1653666527839,
+      "contentHash": "f974e89938f989c28484d355d956af46",
+      "sourceName": "contracts/sfc/NetworkInitializer.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./SFC.sol",
+        "./NodeDriver.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "NetworkInitializer"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\proposal\\test\\ExplicitProposal.sol": {
+      "lastModificationDate": 1651300645992,
+      "contentHash": "fcbe15af120e70c479f62b875f64a6c6",
+      "sourceName": "contracts/proposal/test/ExplicitProposal.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../base/BaseProposal.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "ExplicitProposal"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\proposal\\base\\CallExecutableProposal.sol": {
+      "lastModificationDate": 1651300645990,
+      "contentHash": "1b23b7814d74c3570038652ce1e21728",
+      "sourceName": "contracts/proposal/base/CallExecutableProposal.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./BaseProposal.sol",
+        "../../governance/Proposal.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "CallExecutableProposal"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\test\\UnitTestGovernable.sol": {
+      "lastModificationDate": 1651300645993,
+      "contentHash": "5faed699d883e75ca5b7fcc7ff8db7f8",
+      "sourceName": "contracts/test/UnitTestGovernable.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../model/Governable.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "UnitTestGovernable"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\adapters\\SFCToGovernable.sol": {
+      "lastModificationDate": 1651300645982,
+      "contentHash": "1766d803bc71615765ab659a8101e8b8",
+      "sourceName": "contracts/adapters/SFCToGovernable.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../model/Governable.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "SFC",
+        "SFCToGovernable"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\Migrations.sol": {
+      "lastModificationDate": 1651300645981,
+      "contentHash": "91ce2bcadc416e6744d63934d511f3f9",
+      "sourceName": "contracts/Migrations.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "Migrations"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\sfc\\Migrations.sol": {
+      "lastModificationDate": 1651068689496,
+      "contentHash": "69a6754fa35f6cf8bdf632c289b1d20b",
+      "sourceName": "contracts/sfc/Migrations.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.4.21 <0.6.0"
+      ],
+      "artifacts": [
+        "Migrations"
+      ]
+    }
+  }
+}
