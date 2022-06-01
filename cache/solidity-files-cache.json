@@ -1290,8 +1290,8 @@
       ]
     },
     "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\ownership\\GovernanceRole.sol": {
-      "lastModificationDate": 1653967794889,
-      "contentHash": "22015bd688d81669afeb4c6ed16a5491",
+      "lastModificationDate": 1654075124198,
+      "contentHash": "673fde463ce6b9511bf84471ad9bc7c4",
       "sourceName": "contracts/ownership/GovernanceRole.sol",
       "solcConfig": {
         "version": "0.5.17",

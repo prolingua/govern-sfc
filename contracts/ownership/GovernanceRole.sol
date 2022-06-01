@@ -16,19 +16,19 @@ contract GovernanceRole is Initializable {
      * @dev Address of the model governing the SFC.
      */
     address private _governance;
-    address private _owner;
+    address private _secondaryOwner;
 
     event GovernanceTransferred(address indexed previousGovernance, address indexed newGovernance);
-    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+    event SecondaryOwnershipTransferred(address indexed previousSecondaryOwner, address indexed newSecondaryOwner);
 
     /**
      * @dev Initializes the contract setting the initial governance role.
      */
-    function initialize(address governance, address owner) internal initializer {
+    function initialize(address governance, address secondaryOwner) internal initializer {
         _governance = governance;
-        _owner = owner;
+        _secondaryOwner = secondaryOwner;
         emit GovernanceTransferred(address(0), _governance);
-        emit OwnershipTransferred(address(0), _owner);
+        emit SecondaryOwnershipTransferred(address(0), _secondaryOwner);
     }
 
     /**
@@ -42,7 +42,7 @@ contract GovernanceRole is Initializable {
      * @dev Throws if called by any address other than the governance contract.
      */
     modifier onlyGovernance() {
-        require((isGovernance() || isOwner()), "GovernanceRole: this function is controlled by the owner and governance contract");
+        require((isGovernance() || isSecondaryOwner()), "GovernanceRole: this function is controlled by the owner and governance contract");
         _;
     }
 
@@ -71,42 +71,42 @@ contract GovernanceRole is Initializable {
     }
 
     /**
-     * @dev Returns the address of the current owner.
+     * @dev Returns the address of the current secondary owner.
      */
-    function owner() public view returns (address) {
-        return _owner;
+    function secondaryOwner() public view returns (address) {
+        return _secondaryOwner;
     }
 
     /**
-     * @dev Throws if called by any account other than the owner.
+     * @dev Throws if called by any account other than the secondary owner.
      */
-    modifier onlyOwner() {
-        require(isOwner(), "Ownable: caller is not the owner");
+    modifier onlySecondaryOwner() {
+        require(isSecondaryOwner(), "GovernanceRole: caller is not the secondary owner");
         _;
     }
 
     /**
-     * @dev Returns true if the caller is the current owner.
+     * @dev Returns true if the caller is the current secondary owner.
      */
-    function isOwner() public view returns (bool) {
-        return msg.sender == _owner;
+    function isSecondaryOwner() public view returns (bool) {
+        return msg.sender == _secondaryOwner;
     }
 
     /**
-     * @dev Transfers ownership of the contract to a new account (`newOwner`).
+     * @dev Transfers secondary ownership of the contract to a new account (`newSecondaryOwner`).
      * Can only be called by the current owner.
      */
-    function transferOwnership(address newOwner) public onlyOwner {
-        _transferOwnership(newOwner);
+    function transferSecondaryOwnership(address newSecondaryOwner) public onlySecondaryOwner {
+        _transferSecondaryOwnership(newSecondaryOwner);
     }
 
     /**
-     * @dev Transfers ownership of the contract to a new account (`newOwner`).
+     * @dev Transfers secondary ownership of the contract to a new account (`newSecondaryOwner`).
      */
-    function _transferOwnership(address newOwner) internal {
-        require(newOwner != address(0), "Ownable: new owner is the zero address");
-        emit OwnershipTransferred(_owner, newOwner);
-        _owner = newOwner;
+    function _transferSecondaryOwnership(address newSecondaryOwner) internal {
+        require(newSecondaryOwner != address(0), "GovernanceRole: new secondary owner is the zero address");
+        emit SecondaryOwnershipTransferred(_secondaryOwner, newSecondaryOwner);
+        _secondaryOwner = newSecondaryOwner;
     }
 
     uint256[50] private ______gap;
