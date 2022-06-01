@@ -2,6 +2,7 @@ pragma solidity ^0.5.0;
 
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "./StakerConstants.sol";
+import "../adapters/GovernanceToSFC.sol";
 import "../ownership/Ownable.sol";
 import "../ownership/GovernanceRole.sol";
 import "../version/Version.sol";
@@ -11,7 +12,7 @@ import "./StakeTokenizer.sol";
 /**
  * @dev Stakers contract defines data structure and methods for validators / validators.
  */
-contract SFC is Initializable, Ownable, GovernanceRole, StakersConstants, Version {
+contract SFC is Initializable, Ownable, GovernanceRole, GovernanceToSFC, StakersConstants, Version {
     using SafeMath for uint256;
 
     /**
@@ -361,6 +362,7 @@ contract SFC is Initializable, Ownable, GovernanceRole, StakersConstants, Versio
     ) external initializer {
         Ownable.initialize(owner);
         GovernanceRole.initialize(governance, owner);
+        GovernanceToSFC.initialize(governance);
         currentSealedEpoch = sealedEpoch;
         node = NodeDriverAuth(nodeDriver);
         totalSupply = _totalSupply;
