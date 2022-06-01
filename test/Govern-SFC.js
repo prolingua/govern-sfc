@@ -141,8 +141,10 @@ class BlockchainNode {
     }
 }
 
-const pubkey = '0x00a2941866e485442aa6b17d67d77f8a6c4580bb556894cc1618473eff1e18203d8cce50b563cf4c75e408886079b8f067069442ed52e2ac9e556baa3f8fcc525f';
+const pubkey = '0xc004ad15bf79efee161507f23df3d571021d08a1ac3cc14beb4a9a204f0c60487298d1d736b9fc6f53779c9579968a9421f411d60728d9dac85ad1286c1ca0e82d8a';
 const emptyAddr = '0x0000000000000000000000000000000000000000';
+const zeroPubKey = '0xc004ad15bf79ef5d7cbdb0f629a6fd7a27b4597fcbf9b7bd9b764efef4ba72b3d4890c89e677a69ffd6f8160c7f0da8b000000000000000000000000000000000000';
+
 
 contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, defaultAcc, otherAcc, firstVoterAcc, secondVoterAcc, delegatorAcc]) => {
     beforeEach(async () => {
@@ -248,6 +250,13 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
                     from: secondValidator,
                     value: amount18('10'),
                 }), 'empty pubkey');
+            });
+
+            it('Should fail if last bytes of pubkey contains 0', async () => {
+                await expectRevert(this.sfc.createValidator(zeroPubKey, {
+                    from: secondValidator,
+                    value: amount18('10'),
+                }), 'invalid pubkey');
             });
 
             it('Should not allow non-owner to update the withdrawalPeriodEpochs param', async () => {
