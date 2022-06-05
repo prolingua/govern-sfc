@@ -27,6 +27,7 @@ const Governance = artifacts.require('UnitTestGovernance');
 const ProposalTemplates = artifacts.require('ProposalTemplates');
 const UnitTestGovernable = artifacts.require('UnitTestGovernable');
 const PlainTextProposal = artifacts.require('PlainTextProposal');
+const NetworkParameterProposal = artifacts.require('NetworkParameterProposal');
 const ExplicitProposal = artifacts.require('ExplicitProposal');
 const ExecLoggingProposal = artifacts.require('ExecLoggingProposal');
 const AlteredPlainTextProposal = artifacts.require('AlteredPlainTextProposal');
@@ -343,7 +344,7 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
     });
 
     describe('Governance test', () => {
-        describe('Plaintext proposals', () => {
+        describe('Plaintext and network proposals', () => {
             it('checking deployment of a plaintext proposal contract', async () => {
                 const examplePlaintext = await PlainTextProposal.new('example', 'example-descr', [], 0, 0, 0, 0, 0, emptyAddr);
                 const plaintextBytecodeVerifier = await BytecodeMatcher.new();
@@ -366,7 +367,18 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
                 await PlainTextProposal.new('plaintext', 'plaintext-descr', [option], ratio('0.5'), ratio('0.6'), 30, 121, 1199, this.verifier.address);
                 await PlainTextProposal.new('plaintext', 'plaintext-descr', [option], ratio('0.5'), ratio('0.8'), 30, 121, 1199, this.verifier.address);
             });
-        
+
+            it('checking deployment of a network parameter proposal contract', async () => {
+                const nPType = new BN(3);
+                const exampleNetworkProposal = await NetworkParameterProposal.new('network', 'network-descr', [], 0, 0, 0, 0, 0, emptyAddr, emptyAddr);
+                const networkBytecodeVerifier = await BytecodeMatcher.new();
+                await networkBytecodeVerifier.initialize(exampleNetworkProposal.address);
+                this.verifier.addTemplate(nPType, 'network', networkBytecodeVerifier.address, DelegatecallType, ratio('0.4'), ratio('0.6'), [0, 1, 2, 3, 4], 120, 1200, 0, 60);
+                const option = web3.utils.fromAscii('option');
+                await expectRevert(NetworkParameterProposal.new('network', 'network-descr', [option], ratio('0.4'), ratio('0.6'), 0, 120, 1201, this.sfc.address, this.verifier.address), 'failed verification');
+                await NetworkParameterProposal.new('network', 'network-descr', [option], ratio('0.5'), ratio('0.8'), 30, 121, 1199, this.sfc.address, this.verifier.address);
+            });
+    
             it('checking creation of a plaintext proposal', async () => {
                 const pType = new BN(1);
                 var ts = (await web3.eth.getBlock('latest')).timestamp;
@@ -412,6 +424,98 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
                 assert.isAtLeast((infoOneOption.votingStartTime).toNumber(), ts);
                 expect(infoOneOption.votingMinEndTime).to.be.bignumber.equal(infoOneOption.votingStartTime.add(new BN(122)));
                 expect(infoOneOption.votingMaxEndTime).to.be.bignumber.equal(infoOneOption.votingStartTime.add(new BN(1198)));
+            });
+
+            it('checking creation of a network parameter proposal', async () => {
+                const pType = new BN(3);
+                let ts = (await web3.eth.getBlock('latest')).timestamp;
+                const choices = [new BN(1)];
+
+                const exampleNetwork = await NetworkParameterProposal.new('example', 'example-descr', [], 0, 0, 0, 0, 0, emptyAddr, emptyAddr);
+                const networkBytecodeVerifier = await BytecodeMatcher.new();
+                await networkBytecodeVerifier.initialize(exampleNetwork.address);
+                this.verifier.addTemplate(pType, 'network', networkBytecodeVerifier.address, DelegatecallType, ratio('0.4'), ratio('0.6'), [0, 1, 2, 3, 4], 120, 1200, 0, 60);
+
+                const option = web3.utils.fromAscii('option');
+                const oneOption = await NetworkParameterProposal.new('network', 'network-descr', [option], ratio('0.5'), ratio('0.6'), 0, 120, 1200, this.sfc.address, this.verifier.address);
+
+                await this.gov.createProposal(oneOption.address, { value: this.proposalFee });
+
+                const infoOneOption = await this.gov.proposalParams(1);
+                expect(infoOneOption.pType).to.be.bignumber.equal(pType);
+                expect(infoOneOption.executable).to.be.bignumber.equal(DelegatecallType);
+                expect(infoOneOption.minVotes).to.be.bignumber.equal(ratio('0.5'));
+                expect(infoOneOption.proposalContract).to.equal(oneOption.address);
+                expect(infoOneOption.options.length).to.equal(1);
+
+                assert.isAtLeast((infoOneOption.votingStartTime).toNumber(), ts);
+                expect(infoOneOption.votingMinEndTime).to.be.bignumber.equal(infoOneOption.votingStartTime.add(new BN(120)));
+                expect(infoOneOption.votingMaxEndTime).to.be.bignumber.equal(infoOneOption.votingStartTime.add(new BN(1200)));
+            });
+
+            const createProposal = async (_exec, optionsNum, minVotes, minAgreement, startDelay = 0, minEnd = 120, maxEnd = 1200, _scales = scales) => {
+                if (await this.verifier.exists(15) === false) {
+                    await this.verifier.addTemplate(15, 'ExecLoggingProposal', emptyAddr, _exec, ratio('0.0'), ratio('0.0'), _scales, 0, 100000000, 0, 100000000);
+                }
+                const option = web3.utils.fromAscii('option');
+                const options = [];
+                for (let i = 0; i < optionsNum; i++) {
+                    options.push(option);
+                }
+                const contract = await ExecLoggingProposal.new('network', 'network-descr', options, minVotes, minAgreement, startDelay, minEnd, maxEnd, this.sfc.address, emptyAddr);
+                await contract.setOpinionScales(_scales);
+                await contract.setExecutable(_exec);
+
+                await this.gov.createProposal(contract.address, { value: this.proposalFee });
+
+                return { proposalID: await this.gov.lastProposalID(), proposal: contract };
+            };
+
+            it('checking proposal execution via delegatecall', async () => {
+                const optionsNum = 1; // use maximum number of options to test gas usage
+                const choices = [new BN(1)];
+                const proposalInfo = await createProposal(DelegatecallType, optionsNum, ratio('0.5'), ratio('0.6'), 60, 120);
+                const { proposalID } = proposalInfo;
+                const proposalContract = proposalInfo.proposal;
+                // make new vote
+
+                evm.advanceTime(60);
+                await this.govable.stake(defaultAcc, ether('10.0'));
+                await this.gov.vote(defaultAcc, proposalID, choices);
+
+                expect(await proposalContract.executedCounter()).to.be.bignumber.equal(new BN(0));
+
+                console.log("Proposal: ", web3.utils.fromWei(proposalID, 'ether'));
+                // check voting is ready to be finalized
+                const votingInfo = await this.gov.calculateVotingTally(proposalID);
+                expect(votingInfo.proposalResolved).to.equal(true);
+                expect(votingInfo.winnerID).to.be.bignumber.equal(new BN(1)); // option with a best opinion
+                expect(votingInfo.votes).to.be.bignumber.equal(ether('10.0'));
+
+                // finalize voting by handling its task
+                const task = await this.gov.getTask(0);
+                expect(await this.gov.tasksCount()).to.be.bignumber.equal(new BN(1));
+                expect(task.active).to.equal(true);
+                expect(task.assignment).to.be.bignumber.equal(new BN(1));
+                expect(task.proposalID).to.be.bignumber.equal(proposalID);
+
+                // await expectRevert(this.gov.handleTasks(0, 1), 'no tasks handled');
+                evm.advanceTime(120); // wait until min voting end time
+                // await expectRevert(this.gov.handleTasks(1, 1), 'no tasks handled');
+                await this.gov.handleTasks(0, 1);
+                // await expectRevert(this.gov.handleTasks(0, 1), 'no tasks handled');
+
+                // check proposal status
+                const proposalStateInfo = await this.gov.proposalState(proposalID);
+                expect(proposalStateInfo.winnerOptionID).to.be.bignumber.equal(new BN(1));
+                expect(proposalStateInfo.votes).to.be.bignumber.equal(ether('10.0'));
+                expect(proposalStateInfo.status).to.be.bignumber.equal(new BN(1));
+
+                // check proposal execution via delegatecall
+                expect(await proposalContract.executedCounter()).to.be.bignumber.equal(new BN(1));
+                expect(await proposalContract.executedMsgSender()).to.equal(defaultAcc);
+                expect(await proposalContract.executedAs()).to.equal(this.gov.address);
+                expect(await proposalContract.executedOption()).to.be.bignumber.equal(new BN(2));
             });
         });
     });

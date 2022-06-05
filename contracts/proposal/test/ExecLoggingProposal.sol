@@ -1,14 +1,14 @@
 pragma solidity ^0.5.0;
 
-import "../PlainTextProposal.sol";
+import "../NetworkParameterProposal.sol";
 import "../../governance/Governance.sol";
 import "../../governance/Proposal.sol";
 
-contract ExecLoggingProposal is PlainTextProposal {
+contract ExecLoggingProposal is NetworkParameterProposal {
     Proposal.ExecType _exec;
 
     constructor(string memory v1, string memory v2, bytes32[] memory v3,
-        uint256 v4, uint256 v5, uint256 v6, uint256 v7, uint256 v8, address v9) PlainTextProposal(v1, v2, v3, v4, v5, v6, v7, v8, v9) public {}
+        uint256 v4, uint256 v5, uint256 v6, uint256 v7, uint256 v8, address v9, address v10) NetworkParameterProposal(v1, v2, v3, v4, v5, v6, v7, v8, v9, v10) public {}
 
     function setOpinionScales(uint256[] memory v) public {
         _opinionScales = v;
