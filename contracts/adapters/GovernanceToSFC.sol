@@ -8,12 +8,12 @@ import "../common/Initializable.sol";
 * contract to SFC to pull proposal data.
 */
 
-interface Gov {
+interface Governance {
     function getActiveProposals() external view returns (uint256);
 }
 
 contract GovernanceToSFC is Ownable {
-    Gov public gov;
+    Governance internal governance;
 
     event GovernanceUpdated(address indexed previousAddress, address indexed newAddress);
 
@@ -21,7 +21,7 @@ contract GovernanceToSFC is Ownable {
      * @dev Initializes the contract setting the default governance contract.
      */
     function initialize(address _governance) internal initializer {
-        gov = Gov(_governance);
+        governance = Governance(_governance);
         emit GovernanceUpdated(address(0), _governance);
     }
 
@@ -29,22 +29,22 @@ contract GovernanceToSFC is Ownable {
      * @dev Returns the address of the current governance contract.
      */
     function getGovernance() public view returns (address) {
-        return address(gov);
+        return address(governance);
     }
 
     /**
      * @dev Updates the currently bridged governance contract.
      */
     function updateGovernanceContract(address _governance) public onlyOwner {
-        emit GovernanceUpdated(address(gov), _governance);
-        gov = Gov(_governance);
+        emit GovernanceUpdated(address(governance), _governance);
+        governance = Governance(_governance);
     }
 
     /**
      * @dev Returns the number of active governance proposals.
      */
-    function activeProposals() internal view returns (uint256) {
-        uint256 _activeProposals = gov.getActiveProposals();
+    function activeProposals() public view returns (uint256) {
+        uint256 _activeProposals = governance.getActiveProposals();
         return _activeProposals;
     }
 

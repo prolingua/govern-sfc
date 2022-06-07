@@ -163,7 +163,7 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
         const evmWriter = await StubEvmWriter.new();
         this.nodeI = await NodeDriverAuth.new();
         const initializer = await NetworkInitializer.new();
-        await initializer.initializeAll(0, 0, this.sfc.address, this.nodeI.address, nodeIRaw.address, evmWriter.address, firstValidator, this.govable.address);
+        await initializer.initializeAll(0, 0, this.sfc.address, this.nodeI.address, nodeIRaw.address, evmWriter.address, firstValidator, this.gov.address);
         await this.sfc.setMaxDelegation(new BN('16'));
         await this.sfc.setValidatorCommission(new BN('15'));
         await this.sfc.setContractCommission(new BN('30'));
@@ -172,20 +172,12 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
         await this.sfc.setWithdrawalPeriodEpoch('3');
         await this.sfc.rebaseTime();
         this.node = new BlockchainNode(this.sfc, firstValidator);
-
-        // Governance
-        this.govable = await UnitTestGovernable.new();
-        this.verifier = await ProposalTemplates.new();
-        this.verifier.initialize();
-        this.gov = await Governance.new();
-        this.gov.initialize(this.govable.address, this.verifier.address);
-        this.proposalFee = await this.gov.proposalFee();
     });
 
     const scales = [0, 2, 3, 4, 5];
 
     // SFC Tests
-    describe('Basic SFC functions', () => {
+    describe('Basic SFC funtions', () => {
         describe('SFC Constants', () => {
             it('Returns current Epoch', async () => {
                 expect((await this.sfc.currentEpoch()).toString()).to.equals('1');
@@ -212,7 +204,7 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
             });
 
             it('Should not allow non-owner to update the contractCommission param', async () => {
-                await expectRevert(this.sfc.setContractCommission(30, { from: secondValidator }), "VM Exception while processing transaction: reverted with reason string 'GovernanceRole: this function is controlled by the owner and governance contract'");
+                await expectRevert(this.sfc.setContractCommission(30, { from: secondValidator }), "VM Exception while processing transaction: reverted with reason string 'SFC: this function is controlled by the owner and governance contract'");
             });
 
             it('Returns the maximum duration of a stake/delegation lockup', async () => {
@@ -220,7 +212,7 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
             });
 
             it('Should not allow non-owner to update the unlockedRewardRatio param', async () => {
-                await expectRevert(this.sfc.setUnlockedRewardRatio(30, { from: secondValidator }), "VM Exception while processing transaction: reverted with reason string 'GovernanceRole: this function is controlled by the owner and governance contract'");
+                await expectRevert(this.sfc.setUnlockedRewardRatio(30, { from: secondValidator }), "VM Exception while processing transaction: reverted with reason string 'SFC: this function is controlled by the owner and governance contract'");
             });
 
             it('Returns the number of epochs that stake is locked', async () => {
@@ -228,7 +220,7 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
             });
 
             it('Should not allow non-owner to update the minLockupDuration param', async () => {
-                await expectRevert(this.sfc.setMinLockupDuration(86400, { from: secondValidator }), "VM Exception while processing transaction: reverted with reason string 'GovernanceRole: this function is controlled by the owner and governance contract'");
+                await expectRevert(this.sfc.setMinLockupDuration(86400, { from: secondValidator }), "VM Exception while processing transaction: reverted with reason string 'SFC: this function is controlled by the owner and governance contract'");
             });
 
             it('Should create a Validator and return the ID', async () => {
@@ -242,7 +234,7 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
             });
 
             it('Should not allow non-owner to update the maxLockupDuration param', async () => {
-                await expectRevert(this.sfc.setMaxLockupDuration(86400, { from: secondValidator }), "VM Exception while processing transaction: reverted with reason string 'GovernanceRole: this function is controlled by the owner and governance contract'");
+                await expectRevert(this.sfc.setMaxLockupDuration(86400, { from: secondValidator }), "VM Exception while processing transaction: reverted with reason string 'SFC: this function is controlled by the owner and governance contract'");
             });
 
             it('Should fail if pubkey is empty', async () => {
@@ -260,7 +252,7 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
             });
 
             it('Should not allow non-owner to update the withdrawalPeriodEpochs param', async () => {
-                await expectRevert(this.sfc.setWithdrawalPeriodEpoch(86400, { from: secondValidator }), "VM Exception while processing transaction: reverted with reason string 'GovernanceRole: this function is controlled by the owner and governance contract'");
+                await expectRevert(this.sfc.setWithdrawalPeriodEpoch(86400, { from: secondValidator }), "VM Exception while processing transaction: reverted with reason string 'SFC: this function is controlled by the owner and governance contract'");
             });
 
             it('Should return Delegation', async () => {
@@ -272,7 +264,7 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
             });
 
             it('Should not allow non-owner to update the withdrawalPeriodTime param', async () => {
-                await expectRevert(this.sfc.setWithdrawalPeriodTime(604800, { from: secondValidator }), "VM Exception while processing transaction: reverted with reason string 'GovernanceRole: this function is controlled by the owner and governance contract'");
+                await expectRevert(this.sfc.setWithdrawalPeriodTime(604800, { from: secondValidator }), "VM Exception while processing transaction: reverted with reason string 'SFC: this function is controlled by the owner and governance contract'");
             });
 
             it('Returns current Epoch', async () => {
@@ -292,6 +284,15 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
                 var ts = (await web3.eth.getBlock('latest')).timestamp;
                 expect((await this.sfc.getTime()).toNumber()).to.be.within(ts - 100, ts + 100);
             });
+
+            it('Should return governance address', async () => {
+                expect((await this.sfc.getGovernance()).toString()).to.equals(this.gov.address);
+            });
+
+            it('Should return active proposals', async () => {
+                expect((await this.sfc.activeProposals()).toString()).to.equals('0');
+            });
+            
         });
 
         describe('Initialize', () => {

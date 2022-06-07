@@ -460,7 +460,7 @@
       ]
     },
     "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\governance\\Governance.sol": {
-      "lastModificationDate": 1654091531313,
+      "lastModificationDate": 1654564472128,
       "contentHash": "b98001dd528efb37558ad808065121ca",
       "sourceName": "contracts/governance/Governance.sol",
       "solcConfig": {
@@ -1246,8 +1246,8 @@
       ]
     },
     "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\sfc\\SFC.sol": {
-      "lastModificationDate": 1654092786034,
-      "contentHash": "0e3b2638df1865596970415f61d11d65",
+      "lastModificationDate": 1654561010976,
+      "contentHash": "fc817e5aaeebce10bb2fe741760b29d3",
       "sourceName": "contracts/sfc/SFC.sol",
       "solcConfig": {
         "version": "0.5.17",
@@ -1278,7 +1278,6 @@
         "./StakerConstants.sol",
         "../adapters/GovernanceToSFC.sol",
         "../ownership/Ownable.sol",
-        "../ownership/GovernanceRole.sol",
         "../version/Version.sol",
         "./NodeDriver.sol",
         "./StakeTokenizer.sol"
@@ -1287,45 +1286,9 @@
         "^0.5.0"
       ],
       "artifacts": [
+        "IGovernanceToSFC",
+        "IOwnable",
         "SFC"
-      ]
-    },
-    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\ownership\\GovernanceRole.sol": {
-      "lastModificationDate": 1654076108772,
-      "contentHash": "673fde463ce6b9511bf84471ad9bc7c4",
-      "sourceName": "contracts/ownership/GovernanceRole.sol",
-      "solcConfig": {
-        "version": "0.5.17",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../common/Initializable.sol"
-      ],
-      "versionPragmas": [
-        "^0.5.0"
-      ],
-      "artifacts": [
-        "GovernanceRole"
       ]
     },
     "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\sfc\\StakeTokenizer.sol": {
@@ -1978,8 +1941,8 @@
       ]
     },
     "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\adapters\\GovernanceToSFC.sol": {
-      "lastModificationDate": 1654091981961,
-      "contentHash": "66c797742e66bc8b6636a29bf54bbde8",
+      "lastModificationDate": 1654564250368,
+      "contentHash": "0af560c815c183bf75ae0ee47fc16030",
       "sourceName": "contracts/adapters/GovernanceToSFC.sol",
       "solcConfig": {
         "version": "0.5.17",
@@ -2013,7 +1976,7 @@
         "^0.5.0"
       ],
       "artifacts": [
-        "Gov",
+        "Governance",
         "GovernanceToSFC"
       ]
     }

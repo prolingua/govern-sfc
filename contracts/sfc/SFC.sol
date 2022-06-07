@@ -4,15 +4,24 @@ import "@openzeppelin/contracts/math/SafeMath.sol";
 import "./StakerConstants.sol";
 import "../adapters/GovernanceToSFC.sol";
 import "../ownership/Ownable.sol";
-import "../ownership/GovernanceRole.sol";
 import "../version/Version.sol";
 import "./NodeDriver.sol";
 import "./StakeTokenizer.sol";
 
+interface IGovernanceToSFC {
+    function getGovernance() external view returns (address);
+
+    function activeProposals() external view returns (uint256);
+}
+
+interface IOwnable {
+    function owner() external view returns (address);
+}
+
 /**
  * @dev Stakers contract defines data structure and methods for validators / validators.
  */
-contract SFC is Initializable, Ownable, GovernanceRole, GovernanceToSFC, StakersConstants, Version {
+contract SFC is Initializable, Ownable, GovernanceToSFC, StakersConstants, Version {
     using SafeMath for uint256;
 
     /**
@@ -361,7 +370,6 @@ contract SFC is Initializable, Ownable, GovernanceRole, GovernanceToSFC, Stakers
         address governance
     ) external initializer {
         Ownable.initialize(owner);
-        GovernanceRole.initialize(governance, owner);
         GovernanceToSFC.initialize(governance);
         currentSealedEpoch = sealedEpoch;
         node = NodeDriverAuth(nodeDriver);
@@ -1522,7 +1530,12 @@ contract SFC is Initializable, Ownable, GovernanceRole, GovernanceToSFC, Stakers
         return penalty;
     }
 
-    function setMaxDelegation(uint256 _maxDelegationRatio) external onlyGovernance {
+    function _onlyGovernance(address _sender) internal {
+        require((_sender == getGovernance() || _sender == owner()), "SFC: this function is controlled by the owner and governance contract");
+    }
+
+    function setMaxDelegation(uint256 _maxDelegationRatio) external {
+        _onlyGovernance(msg.sender);
         _updateMaxDelegation(_maxDelegationRatio);
     }
 
@@ -1531,7 +1544,8 @@ contract SFC is Initializable, Ownable, GovernanceRole, GovernanceToSFC, Stakers
         emit UpdatedMaxDelegationRatio(_maxDelegation);
     }
 
-    function setMinSelfStake(uint256 _minSelfStake) external onlyGovernance {
+    function setMinSelfStake(uint256 _minSelfStake) external {
+        _onlyGovernance(msg.sender);
         _updateMinSelfStake(_minSelfStake);
     }
 
@@ -1540,7 +1554,8 @@ contract SFC is Initializable, Ownable, GovernanceRole, GovernanceToSFC, Stakers
         emit UpdatedMinSelfStake(_minSelfStake);
     }
 
-    function setValidatorCommission(uint256 _validatorCommission) external onlyGovernance {
+    function setValidatorCommission(uint256 _validatorCommission) external {
+        _onlyGovernance(msg.sender);
         _updateValidatorCommission(_validatorCommission);
     }
 
@@ -1549,7 +1564,8 @@ contract SFC is Initializable, Ownable, GovernanceRole, GovernanceToSFC, Stakers
         emit UpdatedValidatorCommission(_validatorCommission);
     }
 
-    function setContractCommission(uint256 _contractCommission) external onlyGovernance {
+    function setContractCommission(uint256 _contractCommission) external {
+        _onlyGovernance(msg.sender);
         _updateContractCommission(_contractCommission);
     }
 
@@ -1558,7 +1574,8 @@ contract SFC is Initializable, Ownable, GovernanceRole, GovernanceToSFC, Stakers
         emit UpdatedContractCommission(_contractCommission);
     }
 
-    function setUnlockedRewardRatio(uint256 _unlockedReward) external onlyGovernance {
+    function setUnlockedRewardRatio(uint256 _unlockedReward) external {
+        _onlyGovernance(msg.sender);
         _updateUnlockedRewardRatio(_unlockedReward);
     }
 
@@ -1567,7 +1584,8 @@ contract SFC is Initializable, Ownable, GovernanceRole, GovernanceToSFC, Stakers
         emit UpdatedUnlockedRewardRatio(_unlockedReward);
     }
 
-    function setMinLockupDuration(uint256 _minLockupDuration) external onlyGovernance {
+    function setMinLockupDuration(uint256 _minLockupDuration) external {
+        _onlyGovernance(msg.sender);
          _updateMinLockupDuration(_minLockupDuration);
     }
 
@@ -1576,7 +1594,8 @@ contract SFC is Initializable, Ownable, GovernanceRole, GovernanceToSFC, Stakers
         emit UpdatedMinLockupDuration(_minLockupDuration);
     }
 
-    function setMaxLockupDuration(uint256 _maxLockupDuration) external onlyGovernance {
+    function setMaxLockupDuration(uint256 _maxLockupDuration) external {
+        _onlyGovernance(msg.sender);
         _updateMaxLockupDuration(_maxLockupDuration);
     }
 
@@ -1585,7 +1604,8 @@ contract SFC is Initializable, Ownable, GovernanceRole, GovernanceToSFC, Stakers
         emit UpdatedMaxLockupDuration(_maxLockupDuration);
     }
 
-    function setWithdrawalPeriodEpoch(uint256 _withdrawalPeriodEpochs) external onlyGovernance {
+    function setWithdrawalPeriodEpoch(uint256 _withdrawalPeriodEpochs) external {
+        _onlyGovernance(msg.sender);
         _updateWithdrawalPeriodEpoch(_withdrawalPeriodEpochs);
     }
 
@@ -1594,7 +1614,8 @@ contract SFC is Initializable, Ownable, GovernanceRole, GovernanceToSFC, Stakers
         emit UpdatedWithdrawalPeriodEpoch(_withdrawalPeriodEpochs);
     }
 
-    function setWithdrawalPeriodTime(uint256 _withdrawalPeriodTime) external onlyGovernance {
+    function setWithdrawalPeriodTime(uint256 _withdrawalPeriodTime) external {
+        _onlyGovernance(msg.sender);
         _updateWithdrawalPeriodTime(_withdrawalPeriodTime);
     }
 
