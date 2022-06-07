@@ -43,10 +43,10 @@ contract ExecLoggingProposal is NetworkParameterProposal {
         executedOption = optionID;
     }
 
-    function execute_delegatecall(address selfAddr, uint256 optionID) external {
-        ExecLoggingProposal self = ExecLoggingProposal(selfAddr);
-        self.executeNonDelegateCall(address(this), msg.sender, optionID);
-    }
+    // function execute_delegatecall(address selfAddr, uint256 optionID) external {
+    //     ExecLoggingProposal self = ExecLoggingProposal(selfAddr);
+    //     self.executeNonDelegateCall(address(this), msg.sender, optionID);
+    // }
 
     function execute_call(uint256 optionID) external {
         executeNonDelegateCall(address(this), msg.sender, optionID);
