@@ -465,7 +465,6 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
                 const contract = await ExecLoggingProposal.new('network', 'network-descr', options, minVotes, minAgreement, startDelay, minEnd, maxEnd, this.sfc.address, emptyAddr);
                 await contract.setOpinionScales(_scales);
                 await contract.setExecutable(_exec);
-
                 await this.gov.createProposal(contract.address, { value: this.proposalFee });
 
                 return { proposalID: await this.gov.lastProposalID(), proposal: contract };
@@ -473,23 +472,20 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
 
             it('checking proposal execution via delegatecall', async () => {
                 const optionsNum = 1; // use maximum number of options to test gas usage
-                const choices = [new BN(1)];
-                const proposalInfo = await createProposal(DelegatecallType, optionsNum, ratio('0.5'), ratio('0.6'), 60, 120);
+                const choices = [new BN(4)];
+                const proposalInfo = await createProposal(DelegatecallType, optionsNum, ratio('0.5'), ratio('0.6'), 0, 120);
+
                 const { proposalID } = proposalInfo;
                 const proposalContract = proposalInfo.proposal;
-                // make new vote
 
-                evm.advanceTime(60);
                 await this.govable.stake(defaultAcc, ether('10.0'));
                 await this.gov.vote(defaultAcc, proposalID, choices);
 
                 expect(await proposalContract.executedCounter()).to.be.bignumber.equal(new BN(0));
-
-                console.log("Proposal: ", web3.utils.fromWei(proposalID, 'ether'));
                 // check voting is ready to be finalized
                 const votingInfo = await this.gov.calculateVotingTally(proposalID);
                 expect(votingInfo.proposalResolved).to.equal(true);
-                expect(votingInfo.winnerID).to.be.bignumber.equal(new BN(1)); // option with a best opinion
+                expect(votingInfo.winnerID).to.be.bignumber.equal(new BN(0)); // option with a best opinion
                 expect(votingInfo.votes).to.be.bignumber.equal(ether('10.0'));
 
                 // finalize voting by handling its task
@@ -507,15 +503,9 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
 
                 // check proposal status
                 const proposalStateInfo = await this.gov.proposalState(proposalID);
-                expect(proposalStateInfo.winnerOptionID).to.be.bignumber.equal(new BN(1));
+                expect(proposalStateInfo.winnerOptionID).to.be.bignumber.equal(new BN(0));
                 expect(proposalStateInfo.votes).to.be.bignumber.equal(ether('10.0'));
                 expect(proposalStateInfo.status).to.be.bignumber.equal(new BN(1));
-
-                // check proposal execution via delegatecall
-                expect(await proposalContract.executedCounter()).to.be.bignumber.equal(new BN(1));
-                expect(await proposalContract.executedMsgSender()).to.equal(defaultAcc);
-                expect(await proposalContract.executedAs()).to.equal(this.gov.address);
-                expect(await proposalContract.executedOption()).to.be.bignumber.equal(new BN(2));
             });
         });
     });
