@@ -30,6 +30,7 @@ const PlainTextProposal = artifacts.require('PlainTextProposal');
 const ExplicitProposal = artifacts.require('ExplicitProposal');
 const ExecLoggingProposal = artifacts.require('ExecLoggingProposal');
 const AlteredPlainTextProposal = artifacts.require('AlteredPlainTextProposal');
+const NetworkParameterProposal = artifacts.require('NetworkParameterProposal');
 const BytecodeMatcher = artifacts.require('BytecodeMatcher');
 const OwnableVerifier = artifacts.require('OwnableVerifier');
 
@@ -344,7 +345,7 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
     });
 
     describe('Governance test', () => {
-        describe('Plaintext proposals', () => {
+        describe('Proposals', () => {
             it('checking deployment of a plaintext proposal contract', async () => {
                 const examplePlaintext = await PlainTextProposal.new('example', 'example-descr', [], 0, 0, 0, 0, 0, emptyAddr);
                 const plaintextBytecodeVerifier = await BytecodeMatcher.new();
@@ -414,6 +415,77 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
                 expect(infoOneOption.votingMinEndTime).to.be.bignumber.equal(infoOneOption.votingStartTime.add(new BN(122)));
                 expect(infoOneOption.votingMaxEndTime).to.be.bignumber.equal(infoOneOption.votingStartTime.add(new BN(1198)));
             });
+        
+            const createProposal = async (_exec, optionsNum, minVotes, minAgreement, startDelay = 0, minEnd = 120, maxEnd = 1200, _scales = scales) => {
+                if (await this.verifier.exists(15) === false) {
+                    await this.verifier.addTemplate(15, 'ExecLoggingProposal', emptyAddr, _exec, ratio('0.0'), ratio('0.0'), _scales, 0, 100000000, 0, 100000000);
+                }
+                const option = web3.utils.fromAscii('option');
+                const options = [];
+                for (let i = 0; i < optionsNum; i++) {
+                    options.push(option);
+                }
+                const contract = await ExecLoggingProposal.new('network', 'network-descr', options, minVotes, minAgreement, startDelay, minEnd, maxEnd, this.sfc.address, emptyAddr);
+                await contract.setOpinionScales(_scales);
+                await contract.setExecutable(_exec);
+        
+                await this.gov.createProposal(contract.address, {value: this.proposalFee});
+        
+                return {proposalID: await this.gov.lastProposalID(), proposal: contract};
+            };
+        
+            /**
+            it('checking proposal execution via delegatecall', async () => {
+                const optionsNum = 1; // use maximum number of options to test gas usage
+                const choices = [new BN(4)];
+                const proposalInfo = await createProposal(DelegatecallType, optionsNum, ratio('0.5'), ratio('0.6'), 0, 120);
+                const proposalID = proposalInfo.proposalID;
+                const proposalContract = proposalInfo.proposal;
+                // make new vote
+                await this.govable.stake(firstValidator, ether('10.0'));
+                await this.gov.vote(firstValidator, proposalID, choices);
+        
+                // finalize voting by handling its task
+                evm.advanceTime(120); // wait until min voting end time
+                await this.gov.handleTasks(0, 1);
+        
+                // check proposal execution via delegatecall
+                expect(await proposalContract.executedCounter()).to.be.bignumber.equal(new BN(1));
+                expect(await proposalContract.executedMsgSender()).to.equal(firstValidator);
+                expect(await proposalContract.executedAs()).to.equal(this.gov.address);
+                expect(await proposalContract.executedOption()).to.be.bignumber.equal(new BN(0));
+            });
+             */
+
+            it('checking proposal execution via delegatecall', async () => {
+                expect((await this.sfc.activeProposals()).toString()).to.equals('0');
+                const optionsNum = 1; // use maximum number of options to test gas usage
+                const choices = [new BN(4)];
+                const proposalInfo = await createProposal(DelegatecallType, optionsNum, ratio('0.5'), ratio('0.6'), 0, 120);
+                expect((await this.sfc.activeProposals()).toString()).to.equals('1');
+                const proposalID = proposalInfo.proposalID;
+                const proposalContract = proposalInfo.proposal;
+                // make new vote
+                await this.govable.stake(firstValidator, ether('10.0'));
+                await this.gov.vote(firstValidator, proposalID, choices);
+                // finalize voting by handling its task
+                evm.advanceTime(120); // wait until min voting end time
+                await this.gov.handleTasks(0, 1);
+
+                // check proposal status
+                const proposalStateInfo = await this.gov.proposalState(proposalID);
+                expect(proposalStateInfo.winnerOptionID).to.be.bignumber.equal(new BN(0));
+                expect(proposalStateInfo.votes).to.be.bignumber.equal(ether('10.0'));
+                expect(proposalStateInfo.status).to.be.bignumber.equal(new BN(1));
+
+                // check proposal execution via delegatecall
+                expect(await proposalContract.executedCounter()).to.be.bignumber.equal(new BN(1));
+                expect(await proposalContract.executedMsgSender()).to.equal(firstValidator);
+                expect(await proposalContract.executedAs()).to.equal(this.gov.address);
+                expect(await proposalContract.executedOption()).to.be.bignumber.equal(new BN(0));
+                expect((await this.sfc.activeProposals()).toString()).to.equals('0');
+            });
+
         });
     });
 });

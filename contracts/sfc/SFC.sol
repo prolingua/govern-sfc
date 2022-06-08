@@ -110,6 +110,11 @@ contract SFC is Initializable, Ownable, GovernanceToSFC, StakersConstants, Versi
 
     uint256 private minStakeAmnt;
     uint256 private maxDelegation;
+
+    function viewMaxDelegation() public view returns (uint256) {
+        return maxDelegation;
+    }
+
     uint256 private validatorCommissionFee;
     uint256 private contractCommissionFee;
     uint256 private unlockedReward;

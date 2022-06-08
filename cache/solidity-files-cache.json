@@ -972,8 +972,8 @@
       ]
     },
     "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\proposal\\test\\ExecLoggingProposal.sol": {
-      "lastModificationDate": 1651300645992,
-      "contentHash": "8d62600f9847495d3345f1252e891fd0",
+      "lastModificationDate": 1654651126187,
+      "contentHash": "0b5277c56883d34fe2525e55f4cf3060",
       "sourceName": "contracts/proposal/test/ExecLoggingProposal.sol",
       "solcConfig": {
         "version": "0.5.17",
@@ -1000,7 +1000,7 @@
         }
       },
       "imports": [
-        "../PlainTextProposal.sol",
+        "../NetworkParameterProposal.sol",
         "../../governance/Governance.sol",
         "../../governance/Proposal.sol"
       ],
@@ -1246,8 +1246,8 @@
       ]
     },
     "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\sfc\\SFC.sol": {
-      "lastModificationDate": 1654561010976,
-      "contentHash": "fc817e5aaeebce10bb2fe741760b29d3",
+      "lastModificationDate": 1654650218381,
+      "contentHash": "29990cfb650af57bbb806cbd8f0aa19b",
       "sourceName": "contracts/sfc/SFC.sol",
       "solcConfig": {
         "version": "0.5.17",
@@ -1978,6 +1978,46 @@
       "artifacts": [
         "Governance",
         "GovernanceToSFC"
+      ]
+    },
+    "C:\\Users\\16266\\Desktop\\initial-govern-sfc\\contracts\\proposal\\NetworkParameterProposal.sol": {
+      "lastModificationDate": 1654654882912,
+      "contentHash": "a8f12b88b8d0d838ce0278325e23ace7",
+      "sourceName": "contracts/proposal/NetworkParameterProposal.sol",
+      "solcConfig": {
+        "version": "0.5.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./base/Cancelable.sol",
+        "./base/DelegatecallExecutableProposal.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "NetworkParameterProposal",
+        "SFC"
       ]
     }
   }
