@@ -2,10 +2,7 @@ pragma solidity ^0.5.0;
 
 import "./base/Cancelable.sol";
 import "./base/DelegatecallExecutableProposal.sol";
-
-interface SFC {
-    function setMaxDelegation(uint256 _maxDelegationRatio) external;
-}
+import "hardhat/console.sol";
 
 /**
  * @dev NetworkParameter proposal
@@ -35,7 +32,6 @@ contract NetworkParameterProposal is DelegatecallExecutableProposal, Cancelable 
     event NetworkParameterUpgradeIsDone(uint256 newValue);
 
     function execute_delegatecall(address selfAddr, uint256 newValue) external {
-        sfc.setMaxDelegation(newValue);
         emit NetworkParameterUpgradeIsDone(newValue);
     }
 }

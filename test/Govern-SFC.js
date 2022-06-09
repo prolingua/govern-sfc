@@ -149,17 +149,17 @@ const zeroPubKey = '0xc004ad15bf79ef5d7cbdb0f629a6fd7a27b4597fcbf9b7bd9b764efef4
 
 contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, defaultAcc, otherAcc, firstVoterAcc, secondVoterAcc, delegatorAcc]) => {
     beforeEach(async () => {
+        this.sfc = await UnitTestSFC.new();
         // Governance
         this.govable = await UnitTestGovernable.new();
         this.verifier = await ProposalTemplates.new();
-        this.verifier.initialize();
+        await this.verifier.initialize();
         this.gov = await Governance.new();
-        this.gov.initialize(this.govable.address, this.verifier.address);
+        await this.gov.initialize(this.govable.address, this.verifier.address, this.sfc.address);
         this.proposalFee = await this.gov.proposalFee();
         await evm.mine();
 
         // SFC 
-        this.sfc = await UnitTestSFC.new();
         const nodeIRaw = await NodeDriver.new();
         const evmWriter = await StubEvmWriter.new();
         this.nodeI = await NodeDriverAuth.new();
@@ -458,6 +458,8 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
              */
 
             it('checking proposal execution via delegatecall', async () => {
+                const maxDelegation = await this.sfc.viewMaxDelegation();
+                console.log((maxDelegation).toNumber());
                 expect((await this.sfc.activeProposals()).toString()).to.equals('0');
                 const optionsNum = 1; // use maximum number of options to test gas usage
                 const choices = [new BN(4)];
@@ -484,6 +486,9 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
                 expect(await proposalContract.executedAs()).to.equal(this.gov.address);
                 expect(await proposalContract.executedOption()).to.be.bignumber.equal(new BN(0));
                 expect((await this.sfc.activeProposals()).toString()).to.equals('0');
+
+                const maxDelegationAfter = await this.sfc.viewMaxDelegation();
+                console.log((maxDelegationAfter).toNumber());
             });
 
         });

@@ -7,6 +7,7 @@ import "../ownership/Ownable.sol";
 import "../version/Version.sol";
 import "./NodeDriver.sol";
 import "./StakeTokenizer.sol";
+import "hardhat/console.sol";
 
 interface IGovernanceToSFC {
     function getGovernance() external view returns (address);
@@ -1540,7 +1541,7 @@ contract SFC is Initializable, Ownable, GovernanceToSFC, StakersConstants, Versi
     }
 
     function setMaxDelegation(uint256 _maxDelegationRatio) external {
-        _onlyGovernance(msg.sender);
+        //_onlyGovernance(msg.sender);
         _updateMaxDelegation(_maxDelegationRatio);
     }
 

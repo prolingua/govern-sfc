@@ -11,6 +11,11 @@ import "./Constants.sol";
 import "./GovernanceSettings.sol";
 import "./LRC.sol";
 import "../version/Version.sol";
+import "hardhat/console.sol";
+
+interface SFC {
+    function setMaxDelegation(uint256 _maxDelegationRatio) external;
+}
 
 contract Governance is Initializable, ReentrancyGuard, GovernanceSettings, Version {
     using SafeMath for uint256;
@@ -42,6 +47,7 @@ contract Governance is Initializable, ReentrancyGuard, GovernanceSettings, Versi
     IProposalVerifier proposalVerifier;
     uint256 public lastProposalID;
     uint256 public activeProposals;
+    address public sfc;
     Task[] tasks;
 
     mapping(uint256 => ProposalState) proposals;
@@ -60,10 +66,11 @@ contract Governance is Initializable, ReentrancyGuard, GovernanceSettings, Versi
     event Voted(address voter, address delegatedTo, uint256 proposalID, uint256[] choices, uint256 weight);
     event VoteCanceled(address voter, address delegatedTo, uint256 proposalID);
 
-    function initialize(address _governableContract, address _proposalVerifier) public initializer {
+    function initialize(address _governableContract, address _proposalVerifier, address _sfcAddress) public initializer {
         ReentrancyGuard.initialize();
         governableContract = Governable(_governableContract);
         proposalVerifier = IProposalVerifier(_proposalVerifier);
+        sfc = _sfcAddress;
     }
 
     function proposalParams(uint256 proposalID) public view returns (uint256 pType, Proposal.ExecType executable, uint256 minVotes, uint256 minAgreement, uint256[] memory opinionScales, bytes32[] memory options, address proposalContract, uint256 votingStartTime, uint256 votingMinEndTime, uint256 votingMaxEndTime) {
@@ -216,6 +223,7 @@ contract Governance is Initializable, ReentrancyGuard, GovernanceSettings, Versi
 
     // handleTask calls handleTaskAssignments and marks task as inactive if it was handled
     function handleTask(uint256 taskIdx) internal returns (bool handled) {
+        console.log("Governance: handleTask()");
         require(taskIdx < tasks.length, "incorrect task index");
         Task storage task = tasks[taskIdx];
         if (!task.active) {
@@ -230,6 +238,7 @@ contract Governance is Initializable, ReentrancyGuard, GovernanceSettings, Versi
 
     // handleTaskAssignments iterates through assignment types and calls a specific handler
     function handleTaskAssignments(uint256 proposalID, uint256 assignment) internal returns (bool handled) {
+        console.log("Governance: handleTaskAssignments()");
         ProposalState storage prop = proposals[proposalID];
         if (!isInitialStatus(prop.status)) {
             // deactivate all tasks for non-active proposals
@@ -243,6 +252,7 @@ contract Governance is Initializable, ReentrancyGuard, GovernanceSettings, Versi
 
     // handleVotingTask handles only TASK_VOTING
     function handleVotingTask(uint256 proposalID, ProposalState storage prop) internal returns (bool handled) {
+        console.log("Governance: handleVotingTask()");
         uint256 minVotesAbs = minVotesAbsolute(governableContract.getTotalWeight(), prop.params.minVotes);
         bool must = block.timestamp >= prop.params.deadlines.votingMaxEndTime;
         bool may = block.timestamp >= prop.params.deadlines.votingMinEndTime && prop.votes >= minVotesAbs;
@@ -272,6 +282,7 @@ contract Governance is Initializable, ReentrancyGuard, GovernanceSettings, Versi
     }
 
     function executeProposal(ProposalState storage prop, uint256 winnerOptionID) internal returns (bool, bool) {
+        console.log("Governance: executeProposal()");
         bool executable = prop.params.executable == Proposal.ExecType.CALL || prop.params.executable == Proposal.ExecType.DELEGATECALL;
         if (!executable) {
             return (true, false);
@@ -289,6 +300,7 @@ contract Governance is Initializable, ReentrancyGuard, GovernanceSettings, Versi
         if (prop.params.executable == Proposal.ExecType.CALL) {
             (success, result) = propAddr.call(abi.encodeWithSignature("execute_call(uint256)", winnerOptionID));
         } else {
+            console.log("Governance: executeProposal delegatecall");
             (success, result) = propAddr.delegatecall(abi.encodeWithSignature("execute_delegatecall(address,uint256)", propAddr, winnerOptionID));
         }
         result;
