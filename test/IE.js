@@ -78,6 +78,7 @@ contract(
         100000000
       );
 
+      console.log('this.sfc.address: ', this.sfc.address);
       const networkParameterProposal = await NetworkParameterProposal.new(
         'logger',
         'logger-descr',
@@ -114,7 +115,8 @@ contract(
       });
 
       const myCounter_callee_before = await networkParameterProposal.myCounter();
-      const myCounter_caller_before = await this.unitTestGovernance.myCounter();
+      const myCounter_caller_before = await this.unitTestGovernance.myCounter1();
+      const maxDelegation_before = await this.sfc.viewMaxDelegation();
       console.log(
         'myCounter_callee_before: ',
         myCounter_callee_before.toString()
@@ -123,9 +125,12 @@ contract(
         'myCounter_caller_before: ',
         myCounter_caller_before.toString()
       );
+      console.log('maxDelegation_before: ', maxDelegation_before.toString());
       await this.unitTestGovernance.handleTasks(0, 1);
+
       const myCounter_callee_after = await networkParameterProposal.myCounter();
-      const myCounter_caller_after = await this.unitTestGovernance.myCounter();
+      const myCounter_caller_after = await this.unitTestGovernance.myCounter1();
+      const maxDelegation_after = await this.sfc.viewMaxDelegation();
       console.log(
         'myCounter_callee_after: ',
         myCounter_callee_after.toString()
@@ -134,6 +139,7 @@ contract(
         'myCounter_caller_after: ',
         myCounter_caller_after.toString()
       );
+      console.log('maxDelegation_after: ', maxDelegation_after.toString());
     });
   }
 );

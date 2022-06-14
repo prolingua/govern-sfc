@@ -3,7 +3,7 @@ pragma solidity ^0.5.0;
 import "../governance/Governance.sol";
 
 contract UnitTestGovernance is Governance {
-    uint256 public myCounter;
+    uint256 public myCounter1;
 
     // reduce proposal fee in tests
     function proposalFee() public pure returns (uint256) {
