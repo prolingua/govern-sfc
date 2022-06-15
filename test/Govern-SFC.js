@@ -432,30 +432,9 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
                 await this.gov.createProposal(contract.address, {value: this.proposalFee});
         
                 return {proposalID: await this.gov.lastProposalID(), proposal: contract};
-            };
-
-             /**
+            };         
+            
             it('checking proposal execution via delegatecall', async () => {
-                const optionsNum = 1; // use maximum number of options to test gas usage
-                const choices = [new BN(4)];
-                const proposalInfo = await createProposal(DelegatecallType, optionsNum, ratio('0.5'), ratio('0.6'), 0, 120);
-                const proposalID = proposalInfo.proposalID;
-                const proposalContract = proposalInfo.proposal;
-                // make new vote
-                await this.govable.stake(firstValidator, ether('10.0'));
-                await this.gov.vote(firstValidator, proposalID, choices);
-        
-                // finalize voting by handling its task
-                evm.advanceTime(120); // wait until min voting end time
-                await this.gov.handleTasks(0, 1);
-        
-                // check proposal execution via delegatecall
-                expect(await proposalContract.executedCounter()).to.be.bignumber.equal(new BN(1));
-                expect(await proposalContract.executedMsgSender()).to.equal(firstValidator);
-                expect(await proposalContract.executedAs()).to.equal(this.gov.address);
-                expect(await proposalContract.executedOption()).to.be.bignumber.equal(new BN(0));
-            });
-             */            it('checking proposal execution via delegatecall', async () => {
                 expect((await this.sfc.activeProposals()).toString()).to.equals('0');
                 const optionsNum = 1; // use maximum number of options to test gas usage
                 const choices = [new BN(4)];
