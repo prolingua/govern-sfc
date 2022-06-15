@@ -433,8 +433,8 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
         
                 return {proposalID: await this.gov.lastProposalID(), proposal: contract};
             };
-        
-            /**
+
+             /**
             it('checking proposal execution via delegatecall', async () => {
                 const optionsNum = 1; // use maximum number of options to test gas usage
                 const choices = [new BN(4)];
@@ -455,9 +455,7 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
                 expect(await proposalContract.executedAs()).to.equal(this.gov.address);
                 expect(await proposalContract.executedOption()).to.be.bignumber.equal(new BN(0));
             });
-             */
-
-            it('checking proposal execution via delegatecall', async () => {
+             */            it('checking proposal execution via delegatecall', async () => {
                 expect((await this.sfc.activeProposals()).toString()).to.equals('0');
                 const optionsNum = 1; // use maximum number of options to test gas usage
                 const choices = [new BN(4)];
@@ -478,12 +476,8 @@ contract('Govern-SFC', async ([firstValidator, secondValidator, thirdValidator, 
                 expect(proposalStateInfo.votes).to.be.bignumber.equal(ether('10.0'));
                 expect(proposalStateInfo.status).to.be.bignumber.equal(new BN(1));
 
-                // check proposal execution via delegatecall
-                expect(await proposalContract.executedCounter()).to.be.bignumber.equal(new BN(1));
-                expect(await proposalContract.executedMsgSender()).to.equal(firstValidator);
-                expect(await proposalContract.executedAs()).to.equal(this.gov.address);
-                expect(await proposalContract.executedOption()).to.be.bignumber.equal(new BN(0));
                 expect((await this.sfc.activeProposals()).toString()).to.equals('0');
+                expect((await this.sfc.maxDelegatedRatio()).toString()).to.equals('100000000000000000000');
             });
 
         });
