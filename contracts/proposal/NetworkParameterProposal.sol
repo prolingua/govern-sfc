@@ -2,6 +2,7 @@ pragma solidity ^0.5.0;
 
 import "./base/Cancelable.sol";
 import "./base/DelegatecallExecutableProposal.sol";
+import "hardhat/console.sol";
 
 interface SFC {
     function setMaxDelegation(uint256 _maxDelegationRatio) external;
@@ -10,12 +11,24 @@ interface SFC {
 /**
  * @dev NetworkParameter proposal
  */
-contract NetworkParameterProposal is DelegatecallExecutableProposal, Cancelable {
+contract NetworkParameterProposal is
+    DelegatecallExecutableProposal,
+    Cancelable
+{
     SFC public sfc;
 
-    constructor(string memory __name, string memory __description, bytes32[] memory __options, 
-        uint256 __minVotes, uint256 __minAgreement, uint256 __start, uint256 __minEnd, uint256 __maxEnd,
-        address _sfc, address verifier) public {
+    constructor(
+        string memory __name,
+        string memory __description,
+        bytes32[] memory __options,
+        uint256 __minVotes,
+        uint256 __minAgreement,
+        uint256 __start,
+        uint256 __minEnd,
+        uint256 __maxEnd,
+        address _sfc,
+        address verifier
+    ) public {
         _name = __name;
         _description = __description;
         _options = __options;
@@ -36,7 +49,11 @@ contract NetworkParameterProposal is DelegatecallExecutableProposal, Cancelable 
 
     function execute_delegatecall(address selfAddr, uint256 newValue) external {
         NetworkParameterProposal self = NetworkParameterProposal(selfAddr);
-        (SFC(self.sfc())).setMaxDelegation(100);
+        console.log("here1");
+        console.log("address(self.sfc()): ", address(self.sfc()));
+        //(SFC(self.sfc())).setMaxDelegation(100);
+        (self.sfc()).setMaxDelegation(100);
+        console.log("here2");
         emit NetworkParameterUpgradeIsDone(newValue);
     }
 }
