@@ -15,7 +15,7 @@ contract NetworkParameterProposal is
     DelegatecallExecutableProposal,
     Cancelable
 {
-    SFC public sfc;
+    address public sfc;
 
     constructor(
         string memory __name,
@@ -38,7 +38,7 @@ contract NetworkParameterProposal is
         _start = __start;
         _minEnd = __minEnd;
         _maxEnd = __maxEnd;
-        sfc = SFC(_sfc);
+        sfc = _sfc;
         // verify the proposal right away to avoid deploying a wrong proposal
         if (verifier != address(0)) {
             require(verifyProposalParams(verifier), "failed verification");
@@ -49,11 +49,7 @@ contract NetworkParameterProposal is
 
     function execute_delegatecall(address selfAddr, uint256 newValue) external {
         NetworkParameterProposal self = NetworkParameterProposal(selfAddr);
-        console.log("here1");
-        console.log("address(self.sfc()): ", address(self.sfc()));
-        //(SFC(self.sfc())).setMaxDelegation(100);
-        (self.sfc()).setMaxDelegation(100);
-        console.log("here2");
+        SFC(self.sfc()).setMaxDelegation(100);
         emit NetworkParameterUpgradeIsDone(newValue);
     }
 }
