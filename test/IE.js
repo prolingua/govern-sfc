@@ -61,10 +61,11 @@ contract(
     });
 
     it('checking execute_call of an executable proposal contract', async () => {
-      const option = web3.utils.fromAscii('option');
+      //const option = web3.utils.fromAscii('hello');
       const options = [];
       for (let i = 0; i < 5; i++) {
-        options.push(option);
+        //options.push(option);
+        options.push(web3.utils.fromAscii('hello' + i.toString()));
       }
       const scales = [0, 1, 2, 3, 4];
 
@@ -84,7 +85,7 @@ contract(
         100000000
       );
 
-      console.log('this.sfc.address: ', this.sfc.address);
+      //console.log('this.sfc.address: ', this.sfc.address);
       const networkParameterProposal = await NetworkParameterProposal.new(
         'logger',
         'logger-descr',
@@ -97,6 +98,15 @@ contract(
         this.sfc.address,
         emptyAddr
       );
+
+      //const options2 = await networkParameterProposal.options();
+      //console.log('options2: ', options2);
+
+      /* const option0 = await networkParameterProposal.getOptionInString(0);
+      console.log('option0: ', option0);
+
+      const option1 = await networkParameterProposal.getOptionInString(1);
+      console.log('option1: ', option1); */
 
       await this.unitTestGovernance.createProposal(
         networkParameterProposal.address,
@@ -119,18 +129,18 @@ contract(
 
       const maxDelegation_before = await this.sfc.viewMaxDelegation();
 
-      console.log('maxDelegation_before: ', maxDelegation_before.toString());
-      console.log(
+      //console.log('maxDelegation_before: ', maxDelegation_before.toString());
+      /* console.log(
         'networkParameterProposal.address: ',
         networkParameterProposal.address
       );
       console.log(
         'this.unitTestGovernance.address: ',
         this.unitTestGovernance.address
-      );
+      ); */
       await this.unitTestGovernance.handleTasks(0, 1);
       const maxDelegation_after = await this.sfc.viewMaxDelegation();
-      console.log('maxDelegation_after: ', maxDelegation_after.toString());
+      // console.log('maxDelegation_after: ', maxDelegation_after.toString());
     });
   }
 );

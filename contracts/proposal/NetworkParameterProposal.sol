@@ -50,6 +50,30 @@ contract NetworkParameterProposal is
     function execute_delegatecall(address selfAddr, uint256 newValue) external {
         NetworkParameterProposal self = NetworkParameterProposal(selfAddr);
         SFC(self.sfc()).setMaxDelegation(100);
+        string memory option0 = self.getOptionInString(0);
+        console.log("option0: ", option0);
+        string memory option1 = self.getOptionInString(1);
+        console.log("option1: ", option1);
         emit NetworkParameterUpgradeIsDone(newValue);
+    }
+
+    function getOptionInString(uint8 index)
+        external
+        view
+        returns (string memory)
+    {
+        bytes32 option = _options[index];
+
+        uint8 i = 0;
+        while (i < 32 && option[i] != 0) {
+            i++;
+        }
+        bytes memory bytesArray = new bytes(i);
+        for (i = 0; i < 32 && option[i] != 0; i++) {
+            bytesArray[i] = option[i];
+        }
+        string memory result = string(bytesArray);
+        //console.log("result: ", result);
+        return result;
     }
 }
