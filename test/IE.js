@@ -65,7 +65,8 @@ contract(
       const options = [];
       for (let i = 0; i < 5; i++) {
         //options.push(option);
-        options.push(web3.utils.fromAscii('hello' + i.toString()));
+        //options.push(web3.utils.fromAscii('hello' + i.toString()));
+        options.push(web3.utils.fromAscii(i.toString()));
       }
       const scales = [0, 1, 2, 3, 4];
 
@@ -98,15 +99,6 @@ contract(
         this.sfc.address,
         emptyAddr
       );
-
-      //const options2 = await networkParameterProposal.options();
-      //console.log('options2: ', options2);
-
-      /* const option0 = await networkParameterProposal.getOptionInString(0);
-      console.log('option0: ', option0);
-
-      const option1 = await networkParameterProposal.getOptionInString(1);
-      console.log('option1: ', option1); */
 
       await this.unitTestGovernance.createProposal(
         networkParameterProposal.address,
