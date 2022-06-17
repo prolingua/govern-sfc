@@ -66,7 +66,7 @@ contract(
       for (let i = 0; i < 5; i++) {
         //options.push(option);
         //options.push(web3.utils.fromAscii('hello' + i.toString()));
-        options.push(web3.utils.fromAscii(i.toString()));
+        options.push(web3.utils.fromAscii((5 * i).toString()));
       }
       const scales = [0, 1, 2, 3, 4];
 
