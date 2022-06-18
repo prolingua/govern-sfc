@@ -4,6 +4,7 @@ require('@openzeppelin/hardhat-upgrades');
 require('@openzeppelin/test-helpers');
 require('@nomiclabs/hardhat-ethers');
 require('@nomiclabs/hardhat-web3');
+require('hardhat-gas-reporter');
 
 module.exports = {
   networks: {
@@ -15,11 +16,11 @@ module.exports = {
     },
     mainnet: {
       url: 'https://rpcapi.fantom.network',
-      chainId: 250,
+      chainId: 250
     },
     testnet: {
       url: 'https://rpc.testnet.fantom.network',
-      chainID: 4002,
+      chainID: 4002
     }
   },
   mocha: {},
@@ -40,7 +41,7 @@ module.exports = {
   },
   gasReporter: {
     currency: 'USD',
-    enabled: false,
+    enabled: true,
     gasPrice: 50
   }
 };
