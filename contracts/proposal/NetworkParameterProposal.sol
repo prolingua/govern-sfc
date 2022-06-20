@@ -50,61 +50,30 @@ contract NetworkParameterProposal is
     function execute_delegatecall(address selfAddr, uint256 newValue) external {
         NetworkParameterProposal self = NetworkParameterProposal(selfAddr);
         SFC(self.sfc()).setMaxDelegation(100);
-
-        string memory option0 = self.getOptionInString(0);
-        console.log("option0: ", option0);
-        uint256 option_int0 = self.stringToUint(option0);
-        console.log("option_int0: ", option_int0);
-
-        string memory option1 = self.getOptionInString(1);
-        console.log("option1: ", option1);
-        uint256 option_int1 = self.stringToUint(option1);
-        console.log("option_int1: ", option_int1);
-
-        string memory option2 = self.getOptionInString(2);
-        console.log("option2: ", option2);
-        uint256 option_int2 = self.stringToUint(option2);
-        console.log("option_int2: ", option_int2);
-
-        uint256 totalOptions = option_int0 + option_int1 + option_int2;
-        console.log("totalOptions: ", totalOptions);
-
         emit NetworkParameterUpgradeIsDone(newValue);
     }
 
-    function getOptionInString(uint8 index)
-        external
-        view
-        returns (string memory)
-    {
-        bytes32 option = _options[index];
-
+    function convertOption(bytes32 option) public view returns (uint256) {
         uint8 i = 0;
         while (i < 32 && option[i] != 0) {
             i++;
         }
-        bytes memory bytesArray = new bytes(i);
+        bytes memory bytesArray1 = new bytes(i);
         for (i = 0; i < 32 && option[i] != 0; i++) {
-            bytesArray[i] = option[i];
+            bytesArray1[i] = option[i];
         }
-        string memory result = string(bytesArray);
-        //console.log("result: ", result);
-        return result;
-    }
+        string memory stringResult = string(bytesArray1);
 
-    function stringToUint(string calldata s)
-        external
-        view
-        returns (uint256 result)
-    {
-        bytes memory b = bytes(s);
-        uint256 i;
-        result = 0;
-        for (i = 0; i < b.length; i++) {
-            uint256 c = uint256(uint8(b[i]));
+        bytes memory bytesArray2 = bytes(stringResult);
+
+        uint256 result = 0;
+        for (i = 0; i < bytesArray2.length; i++) {
+            uint256 c = uint256(uint8(bytesArray2[i]));
             if (c >= 48 && c <= 57) {
                 result = result * 10 + (c - 48);
             }
         }
+
+        return result;
     }
 }

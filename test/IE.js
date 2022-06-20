@@ -20,6 +20,9 @@ const UnitTestGovernance = artifacts.require('UnitTestGovernance');
 const ProposalTemplates = artifacts.require('ProposalTemplates');
 const UnitTestGovernable = artifacts.require('UnitTestGovernable');
 const NetworkParameterProposal = artifacts.require('NetworkParameterProposal');
+const DynamicNetworkParameterProposal = artifacts.require(
+  'DynamicNetworkParameterProposal'
+);
 
 const NonExecutableType = new BN('0');
 const CallType = new BN('1');
@@ -60,7 +63,7 @@ contract(
       this.proposalFee = await this.unitTestGovernance.proposalFee();
     });
 
-    it('checking execute_call of an executable proposal contract', async () => {
+    /*  it('checking execute_call of an executable proposal contract', async () => {
       //const option = web3.utils.fromAscii('hello');
       const options = [];
       for (let i = 0; i < 5; i++) {
@@ -122,17 +125,63 @@ contract(
       const maxDelegation_before = await this.sfc.viewMaxDelegation();
 
       //console.log('maxDelegation_before: ', maxDelegation_before.toString());
-      /* console.log(
-        'networkParameterProposal.address: ',
-        networkParameterProposal.address
-      );
-      console.log(
-        'this.unitTestGovernance.address: ',
-        this.unitTestGovernance.address
-      ); */
-      await this.unitTestGovernance.handleTasks(0, 1);
-      const maxDelegation_after = await this.sfc.viewMaxDelegation();
+      //  console.log(
+      //   'networkParameterProposal.address: ',
+      //   networkParameterProposal.address
+      // );
+      // console.log(
+      //   'this.unitTestGovernance.address: ',
+      //   this.unitTestGovernance.address
+      // ); 
+      // await this.unitTestGovernance.handleTasks(0, 1);
+      // const maxDelegation_after = await this.sfc.viewMaxDelegation();
       // console.log('maxDelegation_after: ', maxDelegation_after.toString());
+    }); */
+
+    it('checking gas usage', async () => {
+      const options = [];
+      for (let i = 0; i < 5; i++) {
+        options.push(web3.utils.fromAscii((5 * i).toString()));
+      }
+
+      const dynamicNetworkParameterProposal = await DynamicNetworkParameterProposal.new(
+        'logger',
+        'logger-descr',
+        options,
+        ratio('0.5'),
+        ratio('0.6'),
+        0,
+        120,
+        1200,
+        this.sfc.address,
+        emptyAddr,
+        'mysignature'
+      );
+
+      const option = web3.utils.fromAscii('15');
+
+      const convertedOption1 = await dynamicNetworkParameterProposal.convertOption(
+        option
+      );
+      console.log('convertedOption1: ', convertedOption1.toString());
+
+      const networkParameterProposal = await NetworkParameterProposal.new(
+        'logger',
+        'logger-descr',
+        options,
+        ratio('0.5'),
+        ratio('0.6'),
+        0,
+        120,
+        1200,
+        this.sfc.address,
+        emptyAddr
+      );
+
+      const convertedOption2 = await networkParameterProposal.convertOption(
+        option
+      );
+      console.log('convertedOption2: ', convertedOption2.toString());
     });
   }
 );
