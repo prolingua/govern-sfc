@@ -158,7 +158,7 @@ contract(
         'mysignature'
       );
 
-      const option = web3.utils.fromAscii('15');
+      const option = web3.utils.fromAscii('12345');
 
       const convertedOption1 = await dynamicNetworkParameterProposal.convertOption(
         option

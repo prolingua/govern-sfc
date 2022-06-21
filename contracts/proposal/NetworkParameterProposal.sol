@@ -58,17 +58,14 @@ contract NetworkParameterProposal is
         while (i < 32 && option[i] != 0) {
             i++;
         }
-        bytes memory bytesArray1 = new bytes(i);
+        bytes memory bytesArray = new bytes(i);
         for (i = 0; i < 32 && option[i] != 0; i++) {
-            bytesArray1[i] = option[i];
+            bytesArray[i] = option[i];
         }
-        string memory stringResult = string(bytesArray1);
-
-        bytes memory bytesArray2 = bytes(stringResult);
 
         uint256 result = 0;
-        for (i = 0; i < bytesArray2.length; i++) {
-            uint256 c = uint256(uint8(bytesArray2[i]));
+        for (i = 0; i < bytesArray.length; i++) {
+            uint256 c = uint256(uint8(bytesArray[i]));
             if (c >= 48 && c <= 57) {
                 result = result * 10 + (c - 48);
             }
